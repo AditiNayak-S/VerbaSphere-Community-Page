@@ -1,0 +1,97 @@
+:root {
+  --black: #0f0f0f;
+  --offwhite: #f9f9f9;
+  --gold: #d4af37;
+  --font-family: 'Poppins', sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: var(--font-family);
+}
+
+body {
+  background-color: var(--black);
+  color: var(--offwhite);
+  padding: 2rem;
+}
+
+header {
+  background: var(--black);
+  color: var(--gold);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav a {
+  color: var(--gold);
+  text-decoration: none;
+  margin-left: 1rem;
+}
+
+nav a.active {
+  border-bottom: 2px solid var(--gold);
+}
+
+h1 {
+  margin-bottom: 2rem;
+  color: var(--gold);
+}
+
+.blog {
+  background: #1a1a1a;
+  border: 1px solid var(--gold);
+  margin-bottom: 2rem;
+  padding: 1rem 1.5rem;
+  border-radius: 10px;
+}
+
+.blog h2 {
+  color: var(--gold);
+}
+
+.blog .meta {
+  font-size: 0.9rem;
+  color: #ccc;
+  margin-bottom: 1rem;
+}
+
+.like-btn {
+  background: none;
+  border: none;
+  color: var(--gold);
+  cursor: pointer;
+  margin-top: 0.5rem;
+}
+
+.comments {
+  margin-top: 1rem;
+}
+
+.comments textarea {
+  width: 100%;
+  padding: 0.5rem;
+  background: var(--black);
+  color: var(--offwhite);
+  border: 1px solid var(--gold);
+  margin-bottom: 0.5rem;
+}
+
+.comments .comment-list {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: #ddd;
+}
+
+footer {
+  text-align: center;
+  margin-top: 3rem;
+  padding: 1rem 0;
+  border-top: 1px solid var(--gold);
+  color: var(--gold);
+}
+
