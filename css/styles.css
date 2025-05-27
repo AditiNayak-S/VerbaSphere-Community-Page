@@ -364,3 +364,47 @@ body.reading-mode .blog {
 body.reading-mode .blog p {
   margin-bottom: 1.5rem;
 }
+
+/* Read More & Blog Links Styling */
+.blog-preview {
+  margin-bottom: 1rem;
+}
+
+.blog-full-content {
+  margin-bottom: 1rem;
+}
+
+.hidden {
+  display: none;
+}
+
+.blog-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin: 1rem 0;
+}
+
+.blog-links a {
+  color: var(--gold);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: opacity 0.3s;
+}
+
+.blog-links a:hover {
+  opacity: 0.8;
+  text-decoration: underline;
+}
+
+.read-more-btn {
+  cursor: pointer;
+}
+
+.wiki-link::before {
+  content: "🌐 ";
+}
+
+.search-link::before {
+  content: "🔍 ";
+}
