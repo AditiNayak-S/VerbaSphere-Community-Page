@@ -1,16 +1,22 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // Theme toggle functionality
-  const themeToggleBtn = document.getElementById("theme-switch");
+  // Enable smooth scrolling
+  document.documentElement.style.scrollBehavior = "smooth";
 
-  // Check for saved theme preference
+  // Theme toggle functionality with animation
+  const themeToggleBtn = document.getElementById("theme-switch");
+  
+  // Check for saved theme preference and system preference
   const savedTheme = localStorage.getItem("theme");
-  if (savedTheme === "light") {
+  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  
+  if (savedTheme === "light" || (!savedTheme && !prefersDark)) {
     document.body.classList.add("light-theme");
     themeToggleBtn.textContent = "☀️";
   }
 
-  // Toggle theme on click
+  // Toggle theme on click with animation
   themeToggleBtn.addEventListener("click", () => {
+    document.body.style.transition = "background-color 0.5s, color 0.5s";
     document.body.classList.toggle("light-theme");
 
     if (document.body.classList.contains("light-theme")) {
