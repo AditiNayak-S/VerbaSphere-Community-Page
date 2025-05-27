@@ -185,12 +185,16 @@ document.addEventListener("DOMContentLoaded", () => {
       blogEl.innerHTML = `
         <h2>${blog.title}</h2>
         <p class="meta">By ${blog.author} | ${formatDate(blog.date)}</p>
-        <p>${blog.content}</p>
+        <p class="blog-preview">${blog.content.substring(0, 100)}${blog.content.length > 100 ? "..." : ""}</p>
+        <div class="blog-full-content hidden">${blog.content}</div>
+        <div class="blog-links">
+          <a href="#" class="read-more-btn" data-index="${index}">${blog.content.length > 100 ? "Read More" : ""}</a>
+          <a href="https://en.wikipedia.org/wiki/${encodeURIComponent(blog.title.replace(/\s+/g, "_"))}" target="_blank" class="wiki-link">Wikipedia</a>
+          <a href="https://www.google.com/search?q=${encodeURIComponent(blog.title)}" target="_blank" class="search-link">Search More</a>
+        </div>
         <div class="blog-actions">
-          <button class="like-btn" data-index="${index}">❤ Like (<span id="like-${index}">0</span>)</button>
-          <button class="copy-btn" data-content="${blog.title} - ${
-        blog.author
-      }&#10;&#10;${blog.content}">📋 Copy</button>
+          <button class="like-btn" data-index="${index}">❤ Like (<span id="like-${index}">${blog.likes}</span>)</button>
+          <button class="copy-btn" data-content="${blog.title} - ${blog.author}&#10;&#10;${blog.content}">📋 Copy</button>
         </div>
         <div class="comments">
           <textarea id="comment-${index}" placeholder="Leave a comment..."></textarea>
@@ -221,12 +225,74 @@ document.addEventListener("DOMContentLoaded", () => {
           });
       });
     });
+
+    // Add event listeners for read more buttons
+    document.querySelectorAll(".read-more-btn").forEach((button) => {
+      button.addEventListener("click", function (e) {
+        e.preventDefault();
+        const blogEl = this.closest(".blog");
+        const preview = blogEl.querySelector(".blog-preview");
+        const fullContent = blogEl.querySelector(".blog-full-content");
+
+        // Toggle visibility
+        if (fullContent.classList.contains("hidden")) {
+          preview.classList.add("hidden");
+          fullContent.classList.remove("hidden");
+          this.textContent = "Read Less";
+        } else {
+          preview.classList.remove("hidden");
+          fullContent.classList.add("hidden");
+          this.textContent = "Read More";
+        }
+      });
+    });
   }
 
   function formatDate(dateString) {
     const options = { year: "numeric", month: "short", day: "numeric" };
     return new Date(dateString).toLocaleDateString(undefined, options);
   }
+});
+
+// Set up Read More functionality
+document.addEventListener("DOMContentLoaded", function () {
+  document.addEventListener("click", function (e) {
+    if (e.target.classList.contains("read-more-btn")) {
+      e.preventDefault();
+      const index = e.target.getAttribute("data-index");
+      const blogEl = e.target.closest(".blog");
+      const preview = blogEl.querySelector(".blog-preview");
+      const fullContent = blogEl.querySelector(".blog-full-content");
+
+      // Toggle visibility
+      if (fullContent.classList.contains("hidden")) {
+        preview.classList.add("hidden");
+        fullContent.classList.remove("hidden");
+        e.target.textContent = "Read Less";
+      } else {
+        preview.classList.remove("hidden");
+        fullContent.classList.add("hidden");
+        e.target.textContent = "Read More";
+      }
+    }
+  });
+});
+
+let blogs = []; // Make sure blogs is accessible globally
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Storing the blogs array in the global scope
+  blogs = [
+    {
+      title: "The Future of AI in Education",
+      author: "Sneha S.",
+      content:
+        "Artificial Intelligence is revolutionizing the educational sector. With personalized learning paths, real-time feedback, and virtual teaching assistants, students experience an enriched way of gaining knowledge.",
+      date: "2025-05-15",
+      likes: 0,
+    },
+    // The other blog entries remain the same
+  ];
 });
 
 const likes = Array(5).fill(0);
