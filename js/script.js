@@ -82,4 +82,60 @@ function updateComments(index) {
     .join("");
 }
 
+// Back to top button functionality
+document.addEventListener("DOMContentLoaded", () => {
+  const backToTopBtn = document.getElementById("back-to-top");
+  
+  // Show the button when user scrolls down 200px from the top
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 200) {
+      backToTopBtn.classList.add("visible");
+    } else {
+      backToTopBtn.classList.remove("visible");
+    }
+  });
+
+  // Scroll to top when button is clicked
+  backToTopBtn.addEventListener("click", () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  });
+
+  // Handle newsletter subscription
+  const newsletterForm = document.getElementById("newsletter-form");
+  const emailInput = document.getElementById("email-input");
+  const subscriptionMessage = document.getElementById("subscription-message");
+
+  newsletterForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    
+    const email = emailInput.value.trim();
+    
+    // Very simple email validation
+    if (email && email.includes("@") && email.includes(".")) {
+      subscriptionMessage.textContent = "Thank you for subscribing to our newsletter!";
+      subscriptionMessage.style.color = "#d4af37";
+      emailInput.value = "";
+      
+      // Simulate storing the email
+      console.log("Email subscribed:", email);
+      
+      // Reset the message after 3 seconds
+      setTimeout(() => {
+        subscriptionMessage.textContent = "";
+      }, 3000);
+    } else {
+      subscriptionMessage.textContent = "Please enter a valid email address.";
+      subscriptionMessage.style.color = "#ff6b6b";
+    }
+  });
+
+  // Current Year for Copyright
+  const currentYear = new Date().getFullYear();
+  document.querySelector(".footer-bottom p").innerHTML = 
+    `&copy; ${currentYear} VerbaSphere. All rights reserved.`;
+});
+
 
