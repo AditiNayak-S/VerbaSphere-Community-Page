@@ -23,34 +23,40 @@
       <button id="reading-mode">📖</button>
     </div>
     <header>
-      <div class="logo">VerbaSphere</div>
-      <nav>
-        <a href="../home/index.html">Home</a>
-        <a href="../about/index.html">About</a>
-        <a href="../community-blogs/index.html" class="active"
-          >Community Blogs</a
-        >
-        <a href="../write-blog/index.html">Write Blog</a>
-        <a href="../contact/index.html">Contact</a>
+      <div class="logo-container">
+        <div class="logo">VerbaSphere</div>
+        <span class="logo-subtitle">Share Your Story</span>
+      </div>
+      <nav aria-label="Main navigation">
+        <a href="../home/index.html" aria-current="false">Home</a>
+        <a href="../about/index.html" aria-current="false">About</a>
+        <a href="../community-blogs/index.html" class="active" aria-current="page">Community Blogs</a>
+        <a href="../write-blog/index.html" aria-current="false">Write Blog</a>
+        <a href="../contact/index.html" aria-current="false">Contact</a>
       </nav>
     </header>
     <main>
       <h1>Community Blogs</h1>
-      <div class="filter-container">
-        <input
-          type="text"
-          id="blog-search"
-          placeholder="Search blogs..."
-          aria-label="Search blogs"
-        />
-        <select id="blog-sort" aria-label="Sort blogs">
-          <option value="default">Default Order</option>
-          <option value="newest">Newest First</option>
-          <option value="oldest">Oldest First</option>
-          <option value="popular">Most Popular</option>
-        </select>
+      <div class="filter-container" role="search">
+        <div class="search-wrapper">
+          <input
+            type="text"
+            id="blog-search"
+            placeholder="Search blogs..."
+            aria-label="Search blogs"
+          />
+          <span class="search-icon">🔍</span>
+        </div>
+        <div class="sort-wrapper">
+          <select id="blog-sort" aria-label="Sort blogs">
+            <option value="default">Default Order</option>
+            <option value="newest">Newest First</option>
+            <option value="oldest">Oldest First</option>
+            <option value="popular">Most Popular</option>
+          </select>
+        </div>
       </div>
-      <div id="blogContainer"></div>
+      <div id="blogContainer" role="feed" aria-label="Blog posts"></div>
     </main>
     <footer>
       <div class="footer-container">
@@ -152,16 +158,24 @@
 
         <div class="footer-section newsletter">
           <h3>Subscribe to Newsletter</h3>
-          <form id="newsletter-form">
-            <input
-              type="email"
-              id="email-input"
-              placeholder="Enter your email"
-              required
-            />
-            <button type="submit" id="subscribe-btn">Subscribe</button>
+          <form id="newsletter-form" novalidate>
+            <div class="input-group">
+              <input
+                type="email"
+                id="email-input"
+                placeholder="Enter your email"
+                required
+                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                aria-label="Email address for newsletter"
+              />
+              <div class="input-feedback" aria-live="polite"></div>
+            </div>
+            <button type="submit" id="subscribe-btn">
+              <span class="button-text">Subscribe</span>
+              <span class="button-icon">✉️</span>
+            </button>
           </form>
-          <p id="subscription-message"></p>
+          <p id="subscription-message" aria-live="polite"></p>
         </div>
       </div>
 
